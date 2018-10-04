@@ -188,7 +188,7 @@ class Instagram
             $params['max_id'] = $max_id;
         }
 
-        return $this->_makeCall('users/' . $id . '/media/recent', $params);
+        return $this->_makeCall('users/self/media/recent', $params);
     }
 
     /**
