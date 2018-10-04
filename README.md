@@ -1,6 +1,8 @@
 # ![Image](example/assets/instagram.png) Instagram PHP API V2
 
-> **Note:** On the 17 Nov 2015 [Instagram](http://developers.instagram.com/post/133424514006/instagram-platform-update) made [changes to their API ](https://instagram.com/developer/changelog/). Apps created before Nov 17, 2015 wont be affected until Jun 2016. Apps created on or after Nov 17 2015 will require to use their updated API. Please note that this library doesn't yet support their new updates. For more information, please see [#182](https://github.com/cosenary/Instagram-PHP-API/issues/182).
+> **Note:** Starting today (January 30), we are launching three new features on the Instagram Graph API designed to help businesses better manage their organic presence on Instagram. As part of our API changes, we will also be deprecating the older Instagram API Platform over the next two years beginning on July 31, 2018.Please see the full summary [here](https://developers.facebook.com/blog/post/2018/01/30/instagram-graph-api-updates/).
+
+> **Note:** On the 17 Nov 2015 [Instagram](http://developers.instagram.coThe following endpoints are deprecated immediately:m/post/133424514006/instagram-platform-update) made [changes to their API ](https://instagram.com/developer/changelog/). Apps created before Nov 17, 2015 wont be affected until Jun 2016. Apps created on or after Nov 17 2015 will require to use their updated API. Please note that this library doesn't yet support their new updates. For more information, please see [#182](https://github.com/cosenary/Instagram-PHP-API/issues/182).
 
 A PHP wrapper for the Instagram API. Feedback or bug reports are appreciated.
 
@@ -59,21 +61,6 @@ $code = $_GET['code'];
 $data = $instagram->getOAuthToken($code);
 
 echo 'Your username is: ' . $data->user->username;
-```
-
-### Get user likes
-
-```php
-// set user access token
-$instagram->setAccessToken($data);
-
-// get all user likes
-$likes = $instagram->getUserLikes();
-
-// take a look at the API response
-echo '<pre>';
-print_r($likes);
-echo '<pre>';
 ```
 
 **All methods return the API data `json_decode()` - so you can directly access the data.**
@@ -158,78 +145,17 @@ getLoginUrl(array(
 **Public methods**
 
 - `getUser($id)`
-- `searchUser($name, <$limit>)`
-- `getUserMedia($id, <$limit>)`
+- `searchUser()`
+- `getUserMedia($limit = 0, $min_id = null, $max_id = null)`
 
 **Authenticated methods**
 
 - `getUser()`
-- `getUserLikes(<$limit>)`
-- `getUserFeed(<$limit>)`
-- `getUserMedia(<$id>, <$limit>)`
-	- if an `$id` isn't defined or equals `'self'`, it returns the media of the logged in user
+- `getUserMedia( <$limit>)`
 
 > [Sample responses of the User Endpoints.](http://instagram.com/developer/endpoints/users/)
 
-### Relationship methods
-
-**Authenticated methods**
-
-- `getUserFollows($id, <$limit>)`
-- `getUserFollower($id, <$limit>)`
-- `getUserRelationship($id)`
-- `modifyRelationship($action, $user)`
-	- `$action` : Action command (follow / unfollow / block / unblock / approve / deny)
-	- `$user` : Target user id
-
-```php
-// Follow the user with the ID 1574083
-$instagram->modifyRelationship('follow', 1574083);
-```
-
 ---
-
-Please note that the `modifyRelationship()` method requires the `relationships` [scope](#get-login-url).
-
----
-
-> [Sample responses of the Relationship Endpoints.](http://instagram.com/developer/endpoints/relationships/)
-
-### Media methods
-
-**Public methods**
-
-- `getMedia($id)`
-	- authenticated users receive the info, whether the queried media is liked
-- `getPopularMedia()`
-- `searchMedia($lat, $lng, <$distance>, <$minTimestamp>, <$maxTimestamp>)`
-	- `$lat` and `$lng` are coordinates and have to be floats like: `48.145441892290336`,`11.568603515625`
-	- `$distance` : Radial distance in meter (default is 1km = 1000, max. is 5km = 5000)
-	- `$minTimestamp` : All media returned will be taken *later* than this timestamp (default: 5 days ago)
-	- `$maxTimestamp` : All media returned will be taken *earlier* than this timestamp (default: now)
-
-> [Sample responses of the Media Endpoints.](http://instagram.com/developer/endpoints/media/)
-
-### Comment methods
-
-**Public methods**
-
-- `getMediaComments($id)`
-
-**Authenticated methods**
-
-- `addMediaComment($id, $text)`
-	- **restricted access:** please email `apidevelopers[at]instagram.com` for access
-- `deleteMediaComment($id, $commentID)`
-	- the comment must be authored by the authenticated user
-
----
-
-Please note that the authenticated methods require the `comments` [scope](#get-login-url).
-
----
-
-> [Sample responses of the Comment Endpoints.](http://instagram.com/developer/endpoints/comments/)
 
 ### Tag methods
 
@@ -240,19 +166,6 @@ Please note that the authenticated methods require the `comments` [scope](#get-l
 - `searchTags($name)`
 
 > [Sample responses of the Tag Endpoints.](http://instagram.com/developer/endpoints/tags/)
-
-### Likes methods
-
-**Authenticated methods**
-
-- `getMediaLikes($id)`
-- `likeMedia($id)`
-- `deleteLikedMedia($id)`
-
-> How to like a Media: [Example usage](https://gist.github.com/3287237)
-> [Sample responses of the Likes Endpoints.](http://instagram.com/developer/endpoints/likes/)
-
-All `<...>` parameters are optional. If the limit is undefined, all available results will be returned.
 
 ## Instagram videos
 
@@ -350,19 +263,6 @@ Iteration with `do-while` loop.
 This example project, located in the `example/` folder, helps you to get started.
 The code is well documented and takes you through all required steps of the OAuth2 process.
 Credit for the awesome Instagram icons goes to [Ricardo de Zoete Pro](http://dribbble.com/RZDESIGN).
-
-#### More examples and tutorials:
-
-- [User likes](https://gist.github.com/cosenary/3287237)
-- [Follow user](https://gist.github.com/cosenary/8322459)
-- [User follower](https://gist.github.com/cosenary/7267139)
-- [Load more button](https://gist.github.com/cosenary/2975779)
-- [User most recent media](https://gist.github.com/cosenary/1711218)
-- [Instagram login](https://gist.github.com/cosenary/8803601)
-- [Instagram signup (9lessons tutorial)](http://www.9lessons.info/2012/05/login-with-instagram-php.html)
-- [Laravel Wrapper](https://github.com/vinkla/instagram)
-
-> Let me know if you have to share a code example, too.
 
 ## Changelog
 

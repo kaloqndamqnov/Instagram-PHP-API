@@ -3,6 +3,38 @@
 All notable changes to `cosenary/instagram` will be documented in this file.
 
 > Version 3.0 is in development and includes support for real-time subscriptions.
+<hr/>
+
+#April 4, 2018
+##The following endpoints are deprecated immediately:
+
+#####Follows and Relationships
+- `GET /users/self/follows`
+- `GET /users/self/followed-by`
+- `GET /users/self/requested-by`
+- `GET /users/{user-id}/relationship`
+- `POST /users/{user-id}/relationship`
+#####Commenting on Public Content
+- `GET /media/{media-id}/comments` (Deprecation not relevant when fetching comments for self media)
+- `POST /media/{media-id}/comments`
+- `DEL /media/{media-id}/comments/comment-id`
+#####Media
+- `GET /media/{media-id}`
+- `GET /media/shortcode/{shortcode}`
+#####Likes
+- `GET /media/{media-id}/likes`
+- `POST /media/{media-id}/likes`
+- `DEL /media/{media-id}/likes`
+#####User Search
+- `GET /users/{user-id}`
+- `GET /users/{user-id}/media/recent`
+- `GET /users/self/media/liked`
+- `GET /users/search`
+
+> Subscriptions - to receive notifications when media is posted Some information on Public Content returned through hashtag and location search will be removed - Name, Bio, Comments, Commenters, Follower Count, Following Count, Post Count, and Profile Picture
+
+https://www.instagram.com/developer/changelog/
+<hr/>
 
 **Instagram 2.2 - 04/10/2014**
 
